@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  OnTheMap
 //
 //  Created by Han Hlaing Moe on 05/09/2021.
@@ -35,6 +35,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginTapped(_ sender: Any) {
         setLoggingIn(true)
+        UdacityClient.createSessionId(email: textFieldEmail.text!, password: textFieldPassword.text!, completion: handleSessionResponse(success:error:))
     }
     
     
@@ -56,7 +57,25 @@ class LoginViewController: UIViewController {
         textFieldEmail.isEnabled = !loggingIn
         textFieldPassword.isEnabled = !loggingIn
         buttonLogin.isEnabled = !loggingIn
-        // buttonSignUp.isEnabled = !loggingIn
+        buttonSignUp.isEnabled = !loggingIn
+    }
+    
+    func handleSessionResponse(success: Bool, error:Error?) {
+        
+        setLoggingIn(false)
+        if success {
+            
+            self.performSegue(withIdentifier: "completeLogin", sender: nil)
+        } else {
+            setLoggingIn(false)
+            showLoginFailure(message: error?.localizedDescription ?? "")
+        }
+    }
+    
+    func showLoginFailure(message: String) {
+        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        show(alertVC, sender: nil)
     }
 }
 
