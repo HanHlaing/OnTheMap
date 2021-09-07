@@ -18,6 +18,11 @@
 		FFDC98C226E4885800126227 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC98C026E4885800126227 /* LaunchScreen.storyboard */; };
 		FFDC98CF26E4B3E300126227 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFDC98CE26E4B3E300126227 /* Colors.xcassets */; };
 		FFDC98D126E4B47800126227 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDC98D026E4B47800126227 /* LoginButton.swift */; };
+		FFF8A6AA26E7831000E87958 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8A6A926E7831000E87958 /* StudentInformation.swift */; };
+		FFF8A6AC26E783CC00E87958 /* StudentInformationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8A6AB26E783CC00E87958 /* StudentInformationResponse.swift */; };
+		FFF8A6AE26E78A9500E87958 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8A6AD26E78A9500E87958 /* MapViewController.swift */; };
+		FFF8A6B026E78BA200E87958 /* StudentInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8A6AF26E78BA200E87958 /* StudentInformationModel.swift */; };
+		FFF8A6B226E7B77B00E87958 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8A6B126E7B77B00E87958 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +39,11 @@
 		FFDC98C326E4885800126227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFDC98CE26E4B3E300126227 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		FFDC98D026E4B47800126227 /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
+		FFF8A6A926E7831000E87958 /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
+		FFF8A6AB26E783CC00E87958 /* StudentInformationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformationResponse.swift; sourceTree = "<group>"; };
+		FFF8A6AD26E78A9500E87958 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		FFF8A6AF26E78BA200E87958 /* StudentInformationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformationModel.swift; sourceTree = "<group>"; };
+		FFF8A6B126E7B77B00E87958 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +71,7 @@
 		FF61BB9826E63EBC00A3A823 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				FFF8A6AF26E78BA200E87958 /* StudentInformationModel.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -85,6 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				FF61BBA026E6636800A3A823 /* LoginResponse.swift */,
+				FFF8A6A926E7831000E87958 /* StudentInformation.swift */,
+				FFF8A6AB26E783CC00E87958 /* StudentInformationResponse.swift */,
 			);
 			path = "Udacity Responses";
 			sourceTree = "<group>";
@@ -134,6 +147,8 @@
 			isa = PBXGroup;
 			children = (
 				FFDC98B926E4885700126227 /* LoginViewController.swift */,
+				FFF8A6AD26E78A9500E87958 /* MapViewController.swift */,
+				FFF8A6B126E7B77B00E87958 /* TableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -217,13 +232,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFF8A6AA26E7831000E87958 /* StudentInformation.swift in Sources */,
 				FF61BB9D26E63F1F00A3A823 /* UdacityClient.swift in Sources */,
 				FFDC98BA26E4885700126227 /* LoginViewController.swift in Sources */,
+				FFF8A6AE26E78A9500E87958 /* MapViewController.swift in Sources */,
 				FFDC98D126E4B47800126227 /* LoginButton.swift in Sources */,
 				FF61BB9F26E6627900A3A823 /* LoginRequest.swift in Sources */,
 				FFDC98B626E4885700126227 /* AppDelegate.swift in Sources */,
+				FFF8A6B226E7B77B00E87958 /* TableViewController.swift in Sources */,
+				FFF8A6AC26E783CC00E87958 /* StudentInformationResponse.swift in Sources */,
 				FFDC98B826E4885700126227 /* SceneDelegate.swift in Sources */,
 				FF61BBA126E6636800A3A823 /* LoginResponse.swift in Sources */,
+				FFF8A6B026E78BA200E87958 /* StudentInformationModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

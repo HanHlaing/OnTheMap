@@ -9,7 +9,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    // MARK: Outlets
+    // MARK: - Outlets
     
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
@@ -17,7 +17,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var buttonSignUp: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    // MARK: Lifecycle methods
+    // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +27,11 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        textFieldEmail.text = ""
-        textFieldPassword.text = ""
+        textFieldEmail.text = "hanhlaingmoe.hhm27@gmail.com"
+        textFieldPassword.text = "hanhlaing@27"
     }
     
-    // MARK: Actions
+    // MARK: - Actions
     
     @IBAction func loginTapped(_ sender: Any) {
         setLoggingIn(true)
@@ -43,7 +43,7 @@ class LoginViewController: UIViewController {
         setLoggingIn(false)
     }
     
-    // MARK: Private methods
+    // MARK: - Private methods
     
     func setLoggingIn(_ loggingIn:Bool) {
         
@@ -67,7 +67,6 @@ class LoginViewController: UIViewController {
             
             self.performSegue(withIdentifier: "completeLogin", sender: nil)
         } else {
-            setLoggingIn(false)
             showLoginFailure(message: error?.localizedDescription ?? "")
         }
     }
