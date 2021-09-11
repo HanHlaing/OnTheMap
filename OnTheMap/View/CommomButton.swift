@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class LoginButton: UIButton {
+class CommomButton: UIButton {
     
     override func awakeFromNib() {
         super.awakeFromNib()

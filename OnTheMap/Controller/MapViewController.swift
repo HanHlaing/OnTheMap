@@ -17,6 +17,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: -Variables/Constants
     
+    let identifierFindLocation = "findLocation"
     var annotations = [MKPointAnnotation]()
     
     // MARK: - Lifecycle methods
@@ -27,32 +28,70 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         getStudentLocations()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshMap(animated)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == identifierFindLocation {
+            let destinationVC = segue.destination as? FindLocationViewController
+            let updateStudentInfo = sender as? (Bool, [StudentInformation])
+            destinationVC?.updatePin = updateStudentInfo?.0
+            destinationVC?.studentArray = updateStudentInfo?.1
+        }
+    }
+    
     // MARK: - Actions
     
     @IBAction func refreshMap(_ sender: Any) {
         getStudentLocations()
     }
     
+    @IBAction func addNewPin(_ sender: Any) {
+        checkAndAddPin()
+    }
     // MARK: - Private methods
+    
+    func checkAndAddPin(){
+        activityIndicator.startAnimating()
+        // fetch student locations from server
+        UdacityClient.getStudentLocation(singleStudent: true, completion: handleStudentLocationsResponse(singleStudent:data:error:))
+    }
     
     func getStudentLocations(){
         activityIndicator.startAnimating()
         // fetch student locations from server
-        UdacityClient.getStudentLocation(singleStudent: false, completion: handleStudentLocationsResponse(data:error:))
+        UdacityClient.getStudentLocation(singleStudent: false, completion: handleStudentLocationsResponse(singleStudent:data:error:))
     }
     
     
-    func handleStudentLocationsResponse(data: [StudentInformation]?, error:Error?) {
+    func handleStudentLocationsResponse(singleStudent:Bool,data: [StudentInformation]?, error:Error?) {
         
         activityIndicator.stopAnimating()
-        guard let data = data else {
-            showErrorAlert("Error in getting locations", error?.localizedDescription ?? "")
-            return
+        if let error = error {
+            showErrorAlert("Error in getting locations", error.localizedDescription )
+        } else {
+            
+            if singleStudent {
+                
+                if let data = data {
+                    showAddPinConfirmAlert(data: data)
+                } else {
+                    performSegue(withIdentifier: identifierFindLocation,  sender: (false, []))
+                }
+            } else {
+                
+                if let data = data {
+                    // stored data in StudentInformationModel
+                    StudentInformationModel.studentData = data
+                    // display pins on map
+                    displyPinsOnMapView()
+                } else {
+                    showErrorAlert("No data!", "There is not data to display")
+                }
+            }
         }
-        // stored data in StudentInformationModel
-        StudentInformationModel.studentData = data
-        // display pins on map
-        displyPinsOnMapView()
     }
     
     func displyPinsOnMapView() {
@@ -67,13 +106,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.addAnnotations(annotations)
     }
     
-    func showErrorAlert(_ title: String, _ messageBody: String) {
-        
-        let alertVC = UIAlertController(title: title, message: messageBody, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        show(alertVC, sender: nil)
-    }
     
+    func showAddPinConfirmAlert(data: [StudentInformation]){
+        
+        let alertVC = UIAlertController(title: "Warning!", message: "You've already put your pin on the map.\nWould you like to overwrite it?", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Yes", style: .default, handler: { [unowned self] (_) in
+            self.performSegue(withIdentifier: identifierFindLocation,  sender: (true, data))
+        }))
+    
+        alertVC.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
+    }
     
     // MARK: - Delegate methods
     

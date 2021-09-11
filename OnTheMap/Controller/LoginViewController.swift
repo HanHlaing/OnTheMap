@@ -13,7 +13,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
-    @IBOutlet weak var buttonLogin: LoginButton!
+    @IBOutlet weak var buttonLogin: CommomButton!
     @IBOutlet weak var buttonSignUp: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -27,8 +27,8 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        textFieldEmail.text = "hanhlaingmoe.hhm27@gmail.com"
-        textFieldPassword.text = "hanhlaing@27"
+        textFieldEmail.text = ""
+        textFieldPassword.text = ""
     }
     
     // MARK: - Actions
@@ -47,13 +47,7 @@ class LoginViewController: UIViewController {
     
     func setLoggingIn(_ loggingIn:Bool) {
         
-        if loggingIn {
-            
-            activityIndicator.startAnimating()
-        } else {
-            
-            activityIndicator.stopAnimating()
-        }
+        loggingIn ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
         textFieldEmail.isEnabled = !loggingIn
         textFieldPassword.isEnabled = !loggingIn
         buttonLogin.isEnabled = !loggingIn
