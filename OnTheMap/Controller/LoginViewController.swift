@@ -46,9 +46,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         case (true, true):
             showErrorAlert( "Required Fileds!", "Please enter email & password")
         case (true, _):
-            showErrorAlert( "Required Fileds!", "Please enter email")
+            showErrorAlert( "Required Filed!", "Please enter email")
         case (_, true):
-            showErrorAlert( "Required Fileds!", "Please enter password")
+            showErrorAlert( "Required Filed!", "Please enter password")
         default:
             setLoggingIn(true)
             UdacityClient.createSessionId(email: textFieldEmail.text!, password: textFieldPassword.text!, completion: handleSessionResponse(success:error:))
