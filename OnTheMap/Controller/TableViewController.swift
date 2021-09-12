@@ -11,6 +11,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     // MARK: - Outlets
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     private var refreshControl = UIRefreshControl()
     
@@ -25,6 +26,8 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.tableView.delegate = self
         self.tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(getStudentLocations), for: .valueChanged)
+        self.view.addSubview(activityIndicator)
+        activityIndicator.bringSubviewToFront(self.view)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,19 +56,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     // MARK: - Private methods
     
     func checkAndAddPin() {
-        
+        activityIndicator.startAnimating()
         // fetch login student location from server
         UdacityClient.getStudentLocation(singleStudent: true, completion: handleStudentLocationsResponse(singleStudent:data:error:))
     }
     
     @objc func getStudentLocations() {
-        
+        activityIndicator.startAnimating()
         // fetch student locations from server
         UdacityClient.getStudentLocation(singleStudent: false, completion: handleStudentLocationsResponse(singleStudent:data:error:))
     }
     
     func handleStudentLocationsResponse(singleStudent:Bool,data: [StudentInformation]?, error:Error?) {
-        
+        activityIndicator.stopAnimating()
         if let error = error {
             showErrorAlert("Error in getting locations", error.localizedDescription )
         } else {
