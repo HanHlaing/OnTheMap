@@ -77,8 +77,7 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
             // var mediaUrl: String
             if urlText.isValidURL {
                 mediaUrl = urlText.prefix(7).lowercased().contains("http:/wwww/") || urlText.prefix(8).lowercased().contains("https://") ? urlText : "https://" + urlText
-                
-                print(URL(string: mediaUrl)!)
+            
                 findLocation(location)
             } else {
                 showErrorAlert("Invalid URL", "You must provide a valid url.")
@@ -95,7 +94,8 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
         CLGeocoder().geocodeAddressString(location) { (placemark, error) in
             
             guard error == nil else {
-                self.showErrorAlert("Failed", "Can not find spot: \(location)")
+                self.setGeoCodingStatus(false)
+                self.showErrorAlert("Failed", "Can not find location: \(location)")
                 return
             }
             let coordinate = placemark?.first!.location!.coordinate
