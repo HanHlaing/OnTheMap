@@ -387,14 +387,27 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="On the Map" id="WMW-TZ-6d2">
-                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="ZHe-Yo-ahS"/>
+                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="ZHe-Yo-ahS">
+                            <connections>
+                                <action selector="logout:" destination="n4q-2j-cwy" id="955-f6-KjX"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem image="icon_addpin" id="8Pm-pg-YAF"/>
-                            <barButtonItem image="icon_refresh" id="vI2-Di-tfM"/>
+                            <barButtonItem image="icon_addpin" id="8Pm-pg-YAF">
+                                <connections>
+                                    <action selector="addNewPin:" destination="n4q-2j-cwy" id="rao-q7-9z8"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="icon_refresh" id="vI2-Di-tfM">
+                                <connections>
+                                    <action selector="refreshData:" destination="n4q-2j-cwy" id="34H-uv-zUm"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ibD-el-Yb8" id="27P-3w-vHr"/>
+                        <segue destination="uRR-0j-uSX" kind="show" identifier="findLocation" id="A7n-uB-z7A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QSN-0g-6rX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -402,6 +415,9 @@
             <point key="canvasLocation" x="2824.6376811594205" y="468.75"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="A7n-uB-z7A"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="icon_addpin" width="24" height="24"/>
         <image name="icon_listview-deselected" width="75" height="50"/>

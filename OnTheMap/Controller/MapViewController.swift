@@ -53,13 +53,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     // MARK: - Private methods
     
-    func checkAndAddPin(){
+    func checkAndAddPin() {
         activityIndicator.startAnimating()
-        // fetch student locations from server
+        // fetch login student location from server
         UdacityClient.getStudentLocation(singleStudent: true, completion: handleStudentLocationsResponse(singleStudent:data:error:))
     }
     
-    func getStudentLocations(){
+    func getStudentLocations() {
         activityIndicator.startAnimating()
         // fetch student locations from server
         UdacityClient.getStudentLocation(singleStudent: false, completion: handleStudentLocationsResponse(singleStudent:data:error:))
@@ -106,17 +106,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.addAnnotations(annotations)
     }
     
-    
-    func showAddPinConfirmAlert(data: [StudentInformation]){
-        
-        let alertVC = UIAlertController(title: "Warning!", message: "You've already put your pin on the map.\nWould you like to overwrite it?", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "Yes", style: .default, handler: { [unowned self] (_) in
-            self.performSegue(withIdentifier: identifierFindLocation,  sender: (true, data))
-        }))
-    
-        alertVC.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
-        self.present(alertVC, animated: true, completion: nil)
-    }
     
     // MARK: - Delegate methods
     
@@ -167,27 +156,3 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
 }
 
-// MARK: - Extensions
-
-extension String {
-    var isValidURL: Bool {
-        let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-        if let match = detector.firstMatch(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count)) {
-            // it is a link, if the match covers the whole string
-            return match.range.length == self.utf16.count
-        } else {
-            return false
-        }
-    }
-}
-
-extension StudentInformation  {
-    func getMapAnnotation() -> MKPointAnnotation {
-        let mapAnnotation = MKPointAnnotation()
-        mapAnnotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
-        mapAnnotation.title = "\(firstName) \(lastName)"
-        mapAnnotation.subtitle = "\(mediaURL)"
-        
-        return mapAnnotation
-    }
-}

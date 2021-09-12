@@ -47,11 +47,14 @@ class FindLocationViewController: UIViewController {
                 return
             }
             // var mediaUrl: String
-            
-            mediaUrl = urlText.prefix(7).lowercased().contains("http:/wwww/") || urlText.prefix(8).lowercased().contains("https://") ? urlText : "https://" + urlText
-            
-            print(URL(string: mediaUrl)!)
-            findLocation(location)
+            if urlText.isValidURL {
+                mediaUrl = urlText.prefix(7).lowercased().contains("http:/wwww/") || urlText.prefix(8).lowercased().contains("https://") ? urlText : "https://" + urlText
+                
+                print(URL(string: mediaUrl)!)
+                findLocation(location)
+            } else {
+                showErrorAlert("Invalid URL", "You must provide a valid url.")
+            }
         }
         
     }
