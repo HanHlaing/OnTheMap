@@ -147,7 +147,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="On the Map" id="dF1-f9-dgX">
-                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="AsD-fA-aQ9" userLabel="Logout"/>
+                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="AsD-fA-aQ9" userLabel="Logout">
+                            <connections>
+                                <action selector="logout" destination="Tiv-Mb-b55" id="OCX-ce-9oN"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Add" image="icon_addpin" id="x0S-Xh-hHg">
                                 <connections>
@@ -389,7 +393,7 @@
                     <navigationItem key="navigationItem" title="On the Map" id="WMW-TZ-6d2">
                         <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="ZHe-Yo-ahS">
                             <connections>
-                                <action selector="logout:" destination="n4q-2j-cwy" id="955-f6-KjX"/>
+                                <action selector="logout" destination="n4q-2j-cwy" id="Jg4-9p-EG7"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>

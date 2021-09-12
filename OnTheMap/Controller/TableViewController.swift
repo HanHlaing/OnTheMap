@@ -66,7 +66,6 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func handleStudentLocationsResponse(singleStudent:Bool,data: [StudentInformation]?, error:Error?) {
         
-        
         if let error = error {
             showErrorAlert("Error in getting locations", error.localizedDescription )
         } else {

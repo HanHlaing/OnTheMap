@@ -189,9 +189,9 @@ class UdacityClient {
             let decoder = JSONDecoder()
             
             do {
-                let responseObj = try decoder.decode(PostLocationResponse.self, from: data)
+                let responseObject = try decoder.decode(PostLocationResponse.self, from: data)
                 DispatchQueue.main.async {
-                     print("\(responseObj)")
+                     print("\(responseObject)")
                      completion(true, nil)
                 }
                 
@@ -221,7 +221,7 @@ class UdacityClient {
         
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
-            guard data != nil else{
+            guard data != nil else {
               //cannot delete session
               DispatchQueue.main.async {
                   completionHandler(false, error)

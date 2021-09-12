@@ -11,6 +11,17 @@ import MapKit
 
 extension UIViewController {
     
+    @IBAction func logout() {
+        
+        UdacityClient.logout { (success: Bool, error: Error?) in
+            if success {
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                self.showErrorAlert("Error in getting locations", error?.localizedDescription ?? "")
+            }
+        }
+    }
+    
     // MARK: Display Error Message to the User
     
     func showErrorAlert(_ title: String, _ messageBody: String) {
