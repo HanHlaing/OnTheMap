@@ -23,6 +23,7 @@ class UdacityClient {
         static let baseLocation = base + "StudentLocation"
         
         case createSessionId
+        case signUp
         case getStudentLocations
         case getSingleStudentLocation(String)
         case getUserData(String)
@@ -34,6 +35,7 @@ class UdacityClient {
             
             switch self {
             case .createSessionId, .logOut: return Endpoints.base + "session"
+            case .signUp: return "https://auth.udacity.com/sign-up"
             case .getStudentLocations: return Endpoints.baseLocation + "?limit=100&skip=0&order=-updatedAt"
             case .getSingleStudentLocation(let acccountId): return  Endpoints.baseLocation + "?uniqueKey=\(acccountId)"
             case .getUserData(let accountId): return Endpoints.base + "users/\(accountId)"
@@ -47,7 +49,7 @@ class UdacityClient {
         }
     }
     
-    // MARK: - Custom Requests and Responses
+    // MARK: - Reusable Requests and Responses
     
     @discardableResult class func taskForGETRequest<ResponseType: Decodable>(isUserDetail: Bool, url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) -> URLSessionTask{
         
@@ -128,6 +130,7 @@ class UdacityClient {
         }
     }
     
+    // Get single/multiple students information
     class func getStudentLocation(singleStudent: Bool, completion: @escaping (Bool,[StudentInformation]?, Error?) -> Void){
         
         let url = singleStudent ? Endpoints.getSingleStudentLocation(Auth.accountId).url:Endpoints.getStudentLocations.url
@@ -142,6 +145,7 @@ class UdacityClient {
         }
     }
     
+    // Get login user information
     class func getUserData(completion: @escaping (UserDataResponse?, Error?) -> Void) {
         
         let url = Endpoints.getUserData(Auth.accountId).url
@@ -168,6 +172,7 @@ class UdacityClient {
         }
     }
     
+    // Update Student Location
     class func putStudentLocation(objectID: String, postLocation: PostLocationRequest, completion: @escaping (Bool, Error?) -> Void) {
         
         var request = URLRequest(url: Endpoints.updatePin(objectID).url)
@@ -207,7 +212,9 @@ class UdacityClient {
     
     }
     
+    // Delete session
     class func logout(completionHandler: @escaping (Bool, Error?)->Void){
+        
         var request = URLRequest(url: Endpoints.logOut.url)
         request.httpMethod = "DELETE"
         var xsrfCookie: HTTPCookie? = nil

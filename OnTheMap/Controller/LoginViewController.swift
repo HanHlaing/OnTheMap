@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Outlets
     
@@ -21,29 +21,53 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+        textFieldEmail.delegate = self
+        textFieldPassword.delegate = self
         textFieldEmail.text = "hanhlaingmoe.hhm27@gmail.com"
         textFieldPassword.text = "hanhlaing@27"
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //if return is pressed resign first responder to hide keyboard
+        textField.resignFirstResponder()
+        return true
     }
     
     // MARK: - Actions
     
     @IBAction func loginTapped(_ sender: Any) {
-        setLoggingIn(true)
-        UdacityClient.createSessionId(email: textFieldEmail.text!, password: textFieldPassword.text!, completion: handleSessionResponse(success:error:))
+        
+        //close the keyboard
+        textFieldPassword.resignFirstResponder()
+        
+        let email = actualInput(for: textFieldEmail)
+        let password = actualInput(for: textFieldPassword)
+        switch (email.isEmpty, password.isEmpty) {
+        case (true, true):
+            showErrorAlert( "Required Fileds!", "Please enter email & password")
+        case (true, _):
+            showErrorAlert( "Required Fileds!", "Please enter email")
+        case (_, true):
+            showErrorAlert( "Required Fileds!", "Please enter password")
+        default:
+            setLoggingIn(true)
+            UdacityClient.createSessionId(email: textFieldEmail.text!, password: textFieldPassword.text!, completion: handleSessionResponse(success:error:))
+        }
     }
     
     
     @IBAction func signUpViaWebsite(_ sender: Any) {
-        setLoggingIn(false)
+        
+        //direct to udacity website
+        UIApplication.shared.open(UdacityClient.Endpoints.signUp.url, options: [:], completionHandler: nil)
     }
     
     // MARK: - Private methods
+    
+    func actualInput(for textField: UITextField) -> String {
+        let text = textField.text ?? ""
+        return text.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
     
     func setLoggingIn(_ loggingIn:Bool) {
         
@@ -61,14 +85,8 @@ class LoginViewController: UIViewController {
             
             self.performSegue(withIdentifier: "completeLogin", sender: nil)
         } else {
-            showLoginFailure(message: error?.localizedDescription ?? "")
+            showErrorAlert("Login Failed", error?.localizedDescription ?? "")
         }
-    }
-    
-    func showLoginFailure(message: String) {
-        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        show(alertVC, sender: nil)
     }
 }
 

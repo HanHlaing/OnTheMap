@@ -37,12 +37,15 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == identifierFindLocation {
-            let destinationVC = segue.destination as? FindLocationViewController
-            let updateStudentInfo = sender as? (Bool, [StudentInformation])
-            destinationVC?.updatePin = updateStudentInfo?.0
-            destinationVC?.studentArray = updateStudentInfo?.1
+
+            if let destinationVC = segue.destination as? FindLocationViewController {
+                let updateStudentInfo = sender as? (Bool, [StudentInformation])
+                destinationVC.updatePin = updateStudentInfo?.0
+                destinationVC.studentArray = updateStudentInfo?.1
+            }
         }
     }
+    
     // MARK: - Actions
     
     @IBAction func refreshData(_ sender: Any) {
@@ -56,18 +59,21 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     // MARK: - Private methods
     
     func checkAndAddPin() {
+        
         activityIndicator.startAnimating()
         // fetch login student location from server
         UdacityClient.getStudentLocation(singleStudent: true, completion: handleStudentLocationsResponse(singleStudent:data:error:))
     }
     
     @objc func getStudentLocations() {
+        
         activityIndicator.startAnimating()
         // fetch student locations from server
         UdacityClient.getStudentLocation(singleStudent: false, completion: handleStudentLocationsResponse(singleStudent:data:error:))
     }
     
     func handleStudentLocationsResponse(singleStudent:Bool,data: [StudentInformation]?, error:Error?) {
+        
         activityIndicator.stopAnimating()
         if let error = error {
             showErrorAlert("Error in getting locations", error.localizedDescription )

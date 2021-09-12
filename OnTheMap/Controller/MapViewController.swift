@@ -35,10 +35,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == identifierFindLocation {
-            let destinationVC = segue.destination as? FindLocationViewController
-            let updateStudentInfo = sender as? (Bool, [StudentInformation])
-            destinationVC?.updatePin = updateStudentInfo?.0
-            destinationVC?.studentArray = updateStudentInfo?.1
+
+            if let destinationVC = segue.destination as? FindLocationViewController {
+                let updateStudentInfo = sender as? (Bool, [StudentInformation])
+                destinationVC.updatePin = updateStudentInfo?.0
+                destinationVC.studentArray = updateStudentInfo?.1
+            }
         }
     }
     
@@ -65,7 +67,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         UdacityClient.getStudentLocation(singleStudent: false, completion: handleStudentLocationsResponse(singleStudent:data:error:))
     }
     
-    
     func handleStudentLocationsResponse(singleStudent:Bool,data: [StudentInformation]?, error:Error?) {
         
         activityIndicator.stopAnimating()
@@ -75,10 +76,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             if singleStudent {
                 
+                // check existing user or newly login
                 if let data = data {
                     showAddPinConfirmAlert(data: data)
                 } else {
-                    performSegue(withIdentifier: identifierFindLocation,  sender: (false, []))
+                    self.performSegue(withIdentifier: identifierFindLocation,  sender: (false, []))
                 }
             } else {
                 

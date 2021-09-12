@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 
-class FindLocationViewController: UIViewController {
+class FindLocationViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Outlets
     
     @IBOutlet weak var textFieldLocation: UITextField!
@@ -27,18 +27,46 @@ class FindLocationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        textFieldLocation.delegate = self
+        textFieldURL.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //if return is pressed resign first responder to hide keyboard
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == identifierAddPin {
+            let controller = segue.destination as! AddPinViewController
+            let locationDetails = sender as!  (String, CLLocationCoordinate2D)
+            controller.location = locationDetails.0
+            controller.coordinate = locationDetails.1
+            controller.updatePin = updatePin
+            controller.studentArray = studentArray
+            
+            print("prepare URL: \(mediaUrl)")
+            controller.url = mediaUrl
+        }
     }
     
     // MARK: - Actions
     
+    @IBAction func cancelPressed(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
     @IBAction func findLocation(_ sender: Any) {
+        
+        //close the keyboard
+        textFieldURL.resignFirstResponder()
         
         guard let location = textFieldLocation.text else { return }
         
         if location == "" {
             showErrorAlert("Wrong location name", "Enter location name to find place on map")
-            
         } else {
             
             guard let urlText = textFieldURL.text else { return }
@@ -57,21 +85,6 @@ class FindLocationViewController: UIViewController {
             }
         }
         
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == identifierAddPin {
-            let controller = segue.destination as! AddPinViewController
-            let locationDetails = sender as!  (String, CLLocationCoordinate2D)
-            controller.location = locationDetails.0
-            controller.coordinate = locationDetails.1
-            controller.updatePin = updatePin
-            controller.studentArray = studentArray
-            
-            print("prepare URL: \(mediaUrl)")
-            controller.url = mediaUrl
-        }
     }
     
     // MARK: - Private methods

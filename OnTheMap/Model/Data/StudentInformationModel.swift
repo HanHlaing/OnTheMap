@@ -9,5 +9,6 @@ import Foundation
 
 class StudentInformationModel {
     
+    // Stored local data
     static var studentData = [StudentInformation]()
 }

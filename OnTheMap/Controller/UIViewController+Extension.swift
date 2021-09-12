@@ -11,6 +11,7 @@ import MapKit
 
 extension UIViewController {
     
+    // Common logout for map view and table view
     @IBAction func logout() {
         
         UdacityClient.logout { (success: Bool, error: Error?) in
@@ -22,8 +23,7 @@ extension UIViewController {
         }
     }
     
-    // MARK: Display Error Message to the User
-    
+    // Display Error Message to the User
     func showErrorAlert(_ title: String, _ messageBody: String) {
         
         let alertVC = UIAlertController(title: title, message: messageBody, preferredStyle: .alert)
@@ -32,6 +32,7 @@ extension UIViewController {
         present(alertVC, animated: true, completion: nil)
     }
     
+    // Common add pin for map view and table view
     func showAddPinConfirmAlert(data: [StudentInformation]){
         
         let alertVC = UIAlertController(title: "Warning!", message: "You've already put your pin on the map.\nWould you like to overwrite it?", preferredStyle: .alert)
@@ -44,7 +45,9 @@ extension UIViewController {
     }
 }
 
+// Check valid URL
 extension String {
+    
     var isValidURL: Bool {
         let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
         if let match = detector.firstMatch(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count)) {
@@ -56,7 +59,9 @@ extension String {
     }
 }
 
+// Map annotation by using student information
 extension StudentInformation  {
+    
     func getMapAnnotation() -> MKPointAnnotation {
         let mapAnnotation = MKPointAnnotation()
         mapAnnotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))

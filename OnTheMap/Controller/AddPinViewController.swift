@@ -33,6 +33,7 @@ class AddPinViewController: UIViewController, MKMapViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         guard coordinate != nil else {
             self.dismiss(animated: true, completion: nil)
             return
@@ -45,6 +46,7 @@ class AddPinViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func tapFinish(_ sender: Any) {
         
+        // Get login student user information
         UdacityClient.getUserData(completion: handleStudentDataResponse(userData:error:))
     }
     
@@ -57,10 +59,10 @@ class AddPinViewController: UIViewController, MKMapViewDelegate {
         }
         activityIndicator.startAnimating()
         let locationRequest = PostLocationRequest(uniqueKey: userData.key, firstName: userData.firstName, lastName: userData.lastName, mapString: self.location, mediaURL: url, latitude: Double(self.coordinate.latitude), longitude: Double(self.coordinate.longitude))
-        updatePin ? updatePin(postLocationData: locationRequest) : addPin(postLocationData: locationRequest)
+        self.updatePin ? updatePin(postLocationData: locationRequest) : addPin(postLocationData: locationRequest)
     }
     
-    
+    // Add pin for new login
     func addPin(postLocationData: PostLocationRequest) {
         
         UdacityClient.postStudentLoaction(postLocation: postLocationData, completion: handleAddPinResponse(userData:error:))
@@ -76,6 +78,7 @@ class AddPinViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    // Update pin for existing login
     func updatePin(postLocationData: PostLocationRequest) {
         if studentArray.isEmpty { return }
         
@@ -85,13 +88,14 @@ class AddPinViewController: UIViewController, MKMapViewDelegate {
     func handleUpdatePinResponse(success: Bool, error:Error?) {
         
         activityIndicator.stopAnimating()
-        if error != nil{
+        if error != nil {
             showErrorAlert( "Can't update pin", "Error message :\n\(error?.localizedDescription ?? "can't post")")
         } else {
             navigationController?.popToRootViewController(animated: true)
         }
     }
     
+    // Show pin on map
     func addPinOnMap(coordinate: CLLocationCoordinate2D) {
         
         let annotation = MKPointAnnotation()

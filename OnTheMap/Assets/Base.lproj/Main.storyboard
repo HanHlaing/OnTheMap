@@ -168,17 +168,17 @@
                     <connections>
                         <outlet property="activityIndicator" destination="vVI-Ao-jFb" id="n55-x8-fLV"/>
                         <outlet property="mapView" destination="Flt-kT-a3Z" id="ib4-sX-SGk"/>
-                        <segue destination="uRR-0j-uSX" kind="show" identifier="findLocation" id="8e1-kk-nu1"/>
+                        <segue destination="uRR-0j-uSX" kind="show" identifier="findLocation" id="Ipa-LX-kox"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CKw-oQ-2DN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2777" y="-206"/>
         </scene>
-        <!--Find Location View Controller-->
+        <!--Add Location-->
         <scene sceneID="yoa-8R-Wxd">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="uRR-0j-uSX" customClass="FindLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="uRR-0j-uSX" customClass="FindLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rfE-1C-lVn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -237,7 +237,13 @@
                             <constraint firstItem="YuV-JZ-Pgh" firstAttribute="centerX" secondItem="rfE-1C-lVn" secondAttribute="centerX" id="thi-ZL-BH9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="cfI-pL-uhI"/>
+                    <navigationItem key="navigationItem" title="Add Location" id="cfI-pL-uhI">
+                        <barButtonItem key="leftBarButtonItem" title="CANCEL" id="48P-fc-8Hm">
+                            <connections>
+                                <action selector="cancelPressed:" destination="uRR-0j-uSX" id="Teo-2H-pyA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="q7m-MP-DNG" id="mCr-cl-I60"/>
                         <outlet property="buttonFind" destination="spx-of-WwT" id="Bgh-9D-d1Y"/>
@@ -248,12 +254,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z0t-M7-jtv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3843" y="-79"/>
+            <point key="canvasLocation" x="4238" y="-29"/>
         </scene>
         <!--Add Pin View Controller-->
         <scene sceneID="cKf-t2-uyA">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="KW9-ab-Mpg" customClass="AddPinViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="KW9-ab-Mpg" customClass="AddPinViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h1O-3h-tAQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -271,7 +277,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="tapFinish:" destination="KW9-ab-Mpg" eventType="touchUpInside" id="yIa-Wx-LiT"/>
+                                    <action selector="tapFinish:" destination="KW9-ab-Mpg" eventType="touchUpInside" id="Alk-IT-OWN"/>
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="fZy-Ql-y2F">
@@ -300,7 +306,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1DE-ku-Fj6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4813" y="-79"/>
+            <point key="canvasLocation" x="5304" y="-44"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="qFQ-xl-pL4">
@@ -417,7 +423,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="xGb-VS-nHj" id="0dt-TR-4fp"/>
                         <outlet property="tableView" destination="ibD-el-Yb8" id="27P-3w-vHr"/>
-                        <segue destination="uRR-0j-uSX" kind="show" identifier="findLocation" id="A7n-uB-z7A"/>
+                        <segue destination="uRR-0j-uSX" kind="show" identifier="findLocation" id="SJn-Tp-AbO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QSN-0g-6rX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -426,7 +432,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="A7n-uB-z7A"/>
+        <segue reference="SJn-Tp-AbO"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon_addpin" width="24" height="24"/>
