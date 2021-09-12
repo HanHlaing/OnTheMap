@@ -23,8 +23,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         textFieldEmail.delegate = self
         textFieldPassword.delegate = self
-        textFieldEmail.text = "hanhlaingmoe.hhm27@gmail.com"
-        textFieldPassword.text = "hanhlaing@27"
+        textFieldEmail.text = ""
+        textFieldPassword.text = ""
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

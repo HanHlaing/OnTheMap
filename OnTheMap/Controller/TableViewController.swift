@@ -25,6 +25,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.refreshControl = refreshControl
+        // Pull to refresh
         refreshControl.addTarget(self, action: #selector(getStudentLocations), for: .valueChanged)
         self.view.addSubview(activityIndicator)
         activityIndicator.bringSubviewToFront(self.view)
@@ -82,8 +83,10 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             if singleStudent {
                 
                 if let data = data {
+                    // Existing user
                     showAddPinConfirmAlert(data: data)
                 } else {
+                    // New user
                     performSegue(withIdentifier: identifierFindLocation,  sender: (false, []))
                 }
             } else {
@@ -124,6 +127,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             self.showErrorAlert("Can't Open URL","URL not valid or student did not provide it")
             return
         }
+        
         UIApplication.shared.open(url, options: [:]){ success in
             guard success == true else {
                 self.showErrorAlert("Can't Open URL","URL not valid or student did not provide it")
