@@ -50,8 +50,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         case (_, true):
             showErrorAlert( "Required Filed!", "Please enter password")
         default:
-            setLoggingIn(true)
-            UdacityClient.createSessionId(email: textFieldEmail.text!, password: textFieldPassword.text!, completion: handleSessionResponse(success:error:))
+            
+            if NetworkStatus.isConnectedToNetwork() {
+                
+                setLoggingIn(true)
+                UdacityClient.createSessionId(email: textFieldEmail.text!, password: textFieldPassword.text!, completion: handleSessionResponse(success:error:))
+            } else {
+                showErrorAlert( "No internet!", "Please check your internet connection.")
+            }
         }
     }
     

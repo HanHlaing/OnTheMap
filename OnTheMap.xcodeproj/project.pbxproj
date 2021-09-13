@@ -24,6 +24,7 @@
 		FFDC98C226E4885800126227 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFDC98C026E4885800126227 /* LaunchScreen.storyboard */; };
 		FFDC98CF26E4B3E300126227 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFDC98CE26E4B3E300126227 /* Colors.xcassets */; };
 		FFDC98D126E4B47800126227 /* CommomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDC98D026E4B47800126227 /* CommomButton.swift */; };
+		FFF7CB9C26EF229000060FE1 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF7CB9B26EF229000060FE1 /* NetworkStatus.swift */; };
 		FFF8A6AA26E7831000E87958 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8A6A926E7831000E87958 /* StudentInformation.swift */; };
 		FFF8A6AC26E783CC00E87958 /* StudentInformationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8A6AB26E783CC00E87958 /* StudentInformationResponse.swift */; };
 		FFF8A6AE26E78A9500E87958 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8A6AD26E78A9500E87958 /* MapViewController.swift */; };
@@ -51,6 +52,7 @@
 		FFDC98C326E4885800126227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FFDC98CE26E4B3E300126227 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		FFDC98D026E4B47800126227 /* CommomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommomButton.swift; sourceTree = "<group>"; };
+		FFF7CB9B26EF229000060FE1 /* NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
 		FFF8A6A926E7831000E87958 /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 		FFF8A6AB26E783CC00E87958 /* StudentInformationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformationResponse.swift; sourceTree = "<group>"; };
 		FFF8A6AD26E78A9500E87958 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				FF0ABDE826EA2AE30002019C /* AddPinViewController.swift */,
 				FF147E9526EAFFE900735A5B /* FindLocationViewController.swift */,
 				FF147E9926EB7E2100735A5B /* UIViewController+Extension.swift */,
+				FFF7CB9B26EF229000060FE1 /* NetworkStatus.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFF8A6AA26E7831000E87958 /* StudentInformation.swift in Sources */,
+				FFF7CB9C26EF229000060FE1 /* NetworkStatus.swift in Sources */,
 				FF61BB9D26E63F1F00A3A823 /* UdacityClient.swift in Sources */,
 				FFDC98BA26E4885700126227 /* LoginViewController.swift in Sources */,
 				FF147E9A26EB7E2100735A5B /* UIViewController+Extension.swift in Sources */,

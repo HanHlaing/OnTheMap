@@ -46,8 +46,12 @@ class AddPinViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func tapFinish(_ sender: Any) {
         
-        // Get login student user information
-        UdacityClient.getUserData(completion: handleStudentDataResponse(userData:error:))
+        if NetworkStatus.isConnectedToNetwork() {
+            // Get login student user information
+            UdacityClient.getUserData(completion: handleStudentDataResponse(userData:error:))
+        } else {
+            showErrorAlert( "No internet!", "Please check your internet connection.")
+        }
     }
     
     // MARK: - Private methods

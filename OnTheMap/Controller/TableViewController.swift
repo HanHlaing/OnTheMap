@@ -22,13 +22,13 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        self.tableView.refreshControl = refreshControl
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.refreshControl = refreshControl
         // Pull to refresh
         refreshControl.addTarget(self, action: #selector(getStudentLocations), for: .valueChanged)
-        self.view.addSubview(activityIndicator)
-        activityIndicator.bringSubviewToFront(self.view)
+        view.addSubview(activityIndicator)
+        activityIndicator.bringSubviewToFront(view)
     }
     
     override func viewDidAppear(_ animated: Bool) {
